@@ -11,7 +11,7 @@ terraform {
       passphrase = "jameshasasecretanditsthispassphrase"
     }
     method "aes_gcm" "my_method" {
-      keys = key_provider.pbkdf2.my_passphrase
+      keys = key_provider.pbkdf2.passphrase
     }
 
     method "unencrypted" "migration" {
@@ -19,9 +19,9 @@ terraform {
 
     state {
       method = method.aes_gcm.my_method
-      
+
       ## Remove the fallback block after migration:
-      fallback{
+      fallback {
         method = method.unencrypted.migration
       }
       ## Enable this after migration:
