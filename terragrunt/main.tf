@@ -27,7 +27,13 @@ terraform {
       ## Enable this after migration:
       #enforced = true
     }
+  }
 
+
+  backend "s3" {
+    bucket = "terragrunt-james-testing-bucket"
+    key    = "spacelift/terragrunt/main.tfstate"
+    region = "eu-west-1"
   }
 }
 
