@@ -33,7 +33,7 @@ terraform {
   backend "s3" {
     bucket = "terragrunt-james-testing-bucket"
     key    = "spacelift/terragrunt/main.tfstate"
-    region = "eu-west-1"
+    region = "eu-central-1"
   }
 }
 
