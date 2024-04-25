@@ -5,6 +5,30 @@ terraform {
       version = "3.6.1"
     }
   }
+
+  encryption {
+    key_provider "pbkdf2" "passphrase" {
+      passphrase = "jameshasasecretanditsthispassphrase"
+    }
+    method "aes_gcm" "my_method" {
+      keys = key_provider.pbkdf2.my_passphrase
+    }
+
+    method "unencrypted" "migration" {
+    }
+
+    state {
+      method = method.aes_gcm.my_method
+      
+      ## Remove the fallback block after migration:
+      fallback{
+        method = method.unencrypted.migration
+      }
+      ## Enable this after migration:
+      #enforced = true
+    }
+
+  }
 }
 
 resource "random_password" "password" {
