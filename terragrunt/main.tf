@@ -13,6 +13,15 @@ resource "random_password" "password" {
   override_special = "_%@"
 }
 
+resource "random_id" "id" {
+  byte_length = 4
+}
+
 output "password" {
-  value = random_password.password.result
+  value     = random_password.password.result
+  sensitive = true
+}
+
+output "id" {
+  value = random_id.id.hex
 }
